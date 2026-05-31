@@ -29,6 +29,15 @@ export const getUser = async (email, password) => {
   return user;
 };
 
+export const getUserById = async (userId) => {
+  const user = await User.findById(userId).select("-password");
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+  return user;
+};
+
 export const addTransaction = async (data) => {
   return await Transaction.create(data);
 };

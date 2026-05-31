@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-import { addUser, getUser } from "../db/db.js";
+import { addUser, getUser, getUserById } from "../db/db.js";
 
 export const registerHandler = async (req, res) => {
   try {
@@ -45,5 +45,17 @@ export const loginHandler = async (req, res) => {
     });
   } catch (error) {
     res.status(401).json({ message: error.message });
+  }
+};
+
+export const currentUserHandler = async (req, res) => {
+  try {
+    const user = await getUserById(req.user.userId);
+
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(404).json({
+      message: error.message,
+    });
   }
 };
