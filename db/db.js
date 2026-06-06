@@ -38,6 +38,10 @@ export const getUserById = async (userId) => {
   return user;
 };
 
+export const updateBalance = async (userId, balance) => {
+  return User.findByIdAndUpdate(userId, { balance }, { new: true }).select("-password");
+};
+
 export const addTransaction = async (data) => {
   return await Transaction.create(data);
 };
