@@ -12,25 +12,28 @@ export const addTransactionHandler = async (req, res) => {
 
 export const getTransactionsHandler = async (req, res) => {
   try {
+    console.log(req.user);
+
     const transactions = await getTransactions(req.user.userId);
 
     res.json(transactions);
   } catch (error) {
+    console.error(error);
+
     res.status(500).json({
-    //   message: error.message,
-    message: 'error here'
+      message: error.message,
     });
   }
 };
 
 export const deleteTransactionHandler = async (req, res) => {
-    try {
-        await deleteTransaction(req.params.id);
+  try {
+    await deleteTransaction(req.params.id, req.params.userId);
 
-        res.json({
-            message: 'Transaction deleted',
-        })
-    } catch (error) {
-        res.status(500).json({message:e= error.message})
-    }
-}
+    res.json({
+      message: "Transaction deleted",
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

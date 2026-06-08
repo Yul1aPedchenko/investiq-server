@@ -11,12 +11,17 @@ export const Transaction = mongoose.model("Transaction", {
     enum: ["income", "expense"],
     required: true,
   },
+  description: {
+    type: String,
+    required: true,
+  },
   category: {
     type: String,
     required: true,
   },
-  subcategory: {
-    type: String,
+  amount: {
+    type: Number,
+    required: true,
   },
   date: {
     type: Date,

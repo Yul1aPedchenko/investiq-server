@@ -47,9 +47,9 @@ export const addTransaction = async (data) => {
 };
 
 export const getTransactions = async (userId) => {
-  return (await Transaction.find({ userId })).sort({ date: -1 });
+  return await Transaction.find({ userId }).sort({ date: -1 });
 };
 
 export const deleteTransaction = async (id) => {
-  return await Transaction.findByIdAndDelete(id);
+  return await Transaction.findOneAndDelete({ _id: id, userId });
 };
